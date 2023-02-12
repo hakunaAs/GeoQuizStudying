@@ -113,15 +113,17 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = quizViewModel.currentQuestionAnswer
         val messageResId:Int = when{
             quizViewModel.isCheater -> R.string.judgement_toast
-            userAnswer == correctAnswer -> { R.string.correct_toast
-                rightAnswers++
-                sumAnswers++
-            }
-            else -> { R.string.incorrect_toast
-                sumAnswers++
-            }
+            userAnswer == correctAnswer -> R.string.correct_toast
+            else -> R.string.incorrect_toast
         }
 
+        if (userAnswer == correctAnswer){
+            rightAnswers++
+            sumAnswers++
+        }
+        else {
+            sumAnswers++
+        }
         quizViewModel.setUserAnswer(true)
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
     }
